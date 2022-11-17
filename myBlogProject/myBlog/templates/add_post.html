@@ -2,13 +2,21 @@
 {% block title%} Create New Blog Post {%endblock%}
 {% block content %}
 
-<h1>Add Post</h1>
+{% if user.is_authenticated %}
 
-<div class="form-group">
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p}}
-        <button class="btn btn-secondary">Post</button>
-</div>
+    <h1>Add Post</h1>
+
+    <div class="form-group">
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p}}
+            <button class="btn btn-secondary">Post</button>
+    </div>
+    
+{% else %}
+
+    <h2>You are not allowed here! [ and you know it... ]</h2>
+    
+{% endif %}
 
 {% endblock %}
