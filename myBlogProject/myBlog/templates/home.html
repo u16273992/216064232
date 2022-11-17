@@ -10,8 +10,9 @@
         <a href="{% url 'article_detail' post.pk %}"> 
             {{ post.title}}
         </a> -
-        {{post.author.first_name}} {{post.author.last_name}} - 
-        {{ post.post_date}} 
+        {{post.author.first_name}} {{post.author.last_name}} 
+        - {{ post.category }}
+        - {{ post.post_date}} 
         
         {% if user.is_authenticated %}
         -
@@ -22,7 +23,7 @@
         {% endif %}
 
         <br/>
-        {{ post.body|slice:200 }}
+        {{ post.body|slice:200| safe}}
     </li>
 {% endfor%}
 </ul>
