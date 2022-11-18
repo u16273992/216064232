@@ -11,15 +11,17 @@
             {{ post.title}}
         </a> -
         {{post.author.first_name}} {{post.author.last_name}} 
-        - {{ post.category }}
+        - <a href="{% url 'category' post.category|slugify %}">  {{ post.category }} </a>
         - {{ post.post_date}} 
         
         {% if user.is_authenticated %}
-        -
-        <small> 
-            <a href="{% url 'update_post' post.pk %}">(Edit)</a> 
-            <a href="{% url 'delete_post' post.pk %}">(Delete)</a> 
-        </small>
+            {% if user.id == post.author.id %}
+            -
+            <small> 
+                <a href="{% url 'update_post' post.pk %}">(Edit)</a> 
+                <a href="{% url 'delete_post' post.pk %}">(Delete)</a> 
+            </small>
+            {% endif %}
         {% endif %}
 
         <br/>
